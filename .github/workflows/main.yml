@@ -1,0 +1,14 @@
+on: [push]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    name: Validation
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: xmlFlow/test-action@v1
+        with:
+          pkp-application: 'ojs'
+          pkp-repository: 'withanage'
+          pkp-branch: 'issue#9214'
