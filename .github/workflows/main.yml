@@ -1,14 +1,22 @@
-on: [push]
-
+on: [push, pull_request]
+name: test
 jobs:
-  validate:
+  upgrade:
     runs-on: ubuntu-latest
-    name: Validation
+    strategy:
+      fail-fast: false
+      matrix:
+        pkp-application: ['ojs','omp','ops']
+        dbs: [ 'pgsql','mysql','mariadb']
+        php-versions: [ '8.1' ,'8.2']
+      
+    name: test
     steps:
       - uses: actions/checkout@v4
       
-      - uses: xmlFlow/test-action@v1
+      - uses: withanage/test-action@v1
         with:
-          pkp-application: 'ojs'
-          pkp-repository: 'withanage'
-          pkp-branch: 'issue#9214'
+          pkp-application:  ${{matrix.pkp-application}}
+          pkp-repository: 'pkp'
+          pkp-branch: 'main' 
+  
