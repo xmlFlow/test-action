@@ -46,7 +46,7 @@ runs:
 
     - name: Install PKP ${{inputs.application}}
       run: |
-        git clone -b ${{inputs.branch || github.head_ref || github.ref_name }} https://github.com/${{inputs.repository}}/${{inputs.application}} ~/${{inputs.application}}
+        git clone -b ${{inputs.branch}} https://github.com/${{inputs.repository}}/${{inputs.application}} ~/${{inputs.application}}
         cd ~/${{inputs.application}}
         git submodule update --init --recursive
       shell: bash
